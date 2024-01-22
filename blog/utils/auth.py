@@ -10,14 +10,15 @@ class EmailOrUsernameModelBackend(ModelBackend):
     """
     def authenticate(self, request, username=None, password=None, **kwargs):
         # Check if the input is an email address
-        if '@' in username:
-            kwargs = {'email': username}
-        else:
-            kwargs = {'username': username}
+        if username:
+            if '@' in username:
+                kwargs = {'email': username}
+            else:
+                kwargs = {'username': username}
 
-        try:
-            user = User.objects.get(**kwargs)
-            if user.check_password(password):
-                return user
-        except User.DoesNotExist:
-            return None
+            try:
+                user = User.objects.get(**kwargs)
+                if user.check_password(password):
+                    return user
+            except User.DoesNotExist:
+                return None

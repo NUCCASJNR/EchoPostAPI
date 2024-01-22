@@ -22,6 +22,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='blogpost',
             name='project_picture',
-            field=models.ImageField(blank=True, upload_to=blog.models.post.project_image_path),
+            field=models.ImageField(blank=True, upload_to=blog.models.post.blog_image_path),
         ),
     ]
