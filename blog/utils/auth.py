@@ -3,14 +3,9 @@
 from django.contrib.auth.backends import ModelBackend
 from blog.models.user import MainUser as User
 
-
 class EmailOrUsernameModelBackend(ModelBackend):
-    """
-    EmailOrUsernameModelBackend Class
-    """
     def authenticate(self, request, username=None, password=None, **kwargs):
-        # Check if the input is an email address
-        if username:
+        if username is not None and password is not None:
             if '@' in username:
                 kwargs = {'email': username}
             else:
@@ -22,3 +17,5 @@ class EmailOrUsernameModelBackend(ModelBackend):
                     return user
             except User.DoesNotExist:
                 return None
+
+        return None

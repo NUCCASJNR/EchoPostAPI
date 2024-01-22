@@ -26,11 +26,13 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from blog.views.signup import SignupViewSet, EmailVerificationViewSet
+from blog.views.login import LoginViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'signup', SignupViewSet, basename='signup')
 router.register(r'verify-email', EmailVerificationViewSet, basename='verify-email')
+router.register(r'login', LoginViewSet, basename='login')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

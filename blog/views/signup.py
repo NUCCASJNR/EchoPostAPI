@@ -13,7 +13,6 @@ from blog.utils.redis_utils import RedisClient
 
 class SignupViewSet(viewsets.ModelViewSet):
     serializer_class = SignupSerializer
-    queryset = User.objects.all()
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

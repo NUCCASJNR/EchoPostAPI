@@ -157,3 +157,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 APPEND_SLASH = False
+
+
+AUTHENTICATION_BACKENDS = [
+    'blog.utils.auth.EmailOrUsernameModelBackend',
+    # 'django.contrib.auth.backends.ModelBackend',
+]
