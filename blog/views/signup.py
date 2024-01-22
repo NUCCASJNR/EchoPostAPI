@@ -44,6 +44,8 @@ class EmailVerificationViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         user = User.custom_get(**{'verification_code': request.data['verification_code']})
+        if not user:
+            return Response({'error': 'Invalid or expired verification code'}, status=status.HTTP_400_BAD_REQUEST)
         redis_client = RedisClient()
         key = f'user_id:{user.id}:{user.verification_code}'
         # Get the key from the redis-cli
@@ -61,4 +63,4 @@ class EmailVerificationViewSet(viewsets.ModelViewSet):
             else:
                 return Response({'error': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response({'error': 'Invalid verification code'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Invalid or expired verification code'}, status=status.HTTP_400_BAD_REQUEST)
