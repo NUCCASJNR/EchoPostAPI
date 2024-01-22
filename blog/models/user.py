@@ -14,9 +14,7 @@ class MainUser(AbstractUser, BaseModel):
     email = models.CharField(max_length=50, unique=True, blank=False)
     first_name = models.CharField(max_length=50, blank=False)
     last_name = models.CharField(max_length=50, blank=False)
-    bio = models.TextField(max_length=500, blank=True)
     password = models.CharField(max_length=128)
-    profile_picture = models.ImageField(upload_to='profile_pictures', blank=True)
 
     USERNAME_FIELD = 'email'
 
