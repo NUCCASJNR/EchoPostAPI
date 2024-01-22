@@ -16,6 +16,7 @@ class MainUser(AbstractUser, BaseModel):
     last_name = models.CharField(max_length=50, blank=False)
     password = models.CharField(max_length=128)
     verification_code = models.CharField(max_length=6, unique=True, blank=True, null=True)
+    verified = models.BooleanField(default=False, blank=True, null=True)
 
     USERNAME_FIELD = 'email'
 

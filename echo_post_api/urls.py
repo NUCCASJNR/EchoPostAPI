@@ -25,13 +25,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from blog.views.signup import SignupViewSet
+from blog.views.signup import SignupViewSet, EmailVerificationViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'signup', SignupViewSet, basename='signup')
+router.register(r'verify-email', EmailVerificationViewSet, basename='verify-email')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth/', include(router.urls)),  # Include a trailing slash after 'auth'
+    path('auth/', include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
