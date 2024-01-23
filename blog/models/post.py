@@ -8,8 +8,8 @@ from blog.models.user import MainUser as User
 
 
 def blog_image_path(instance, filename):
-    # file will be uploaded to MEDIA_ROOT/project_images/<project_id>/<filename>
-    return f'project_images/{instance.id}/{filename}'
+    # file will be uploaded to MEDIA_ROOT/blog_images/<blog_id>/<filename>
+    return f'blog_images/{instance.id}/{filename}'
 
 
 class BlogPost(BaseModel):
@@ -21,9 +21,9 @@ class BlogPost(BaseModel):
     sub_title: subtitle of the post
     author: author of the post
     """
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=50)
     content = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, db_column='user_id')
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, db_column='user_id')
     image = models.ImageField(blank=True, upload_to=blog_image_path)
 
     class Meta:

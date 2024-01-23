@@ -19,3 +19,6 @@ class EmailOrUsernameModelBackend(ModelBackend):
                 return None
 
         return None
+    
+    def authenticate_header(self, request):
+        return 'Bearer realm="api"'
