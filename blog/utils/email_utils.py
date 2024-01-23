@@ -52,7 +52,7 @@ class EmailUtils:
         try:
             response = requests.post(url, data=request_payload)
             if response.status_code == 200:
-                print(f'Email Successfully sent to {user.email}')
+                print(response.json())
                 return True
             else:
                 print(f'Error sending verification email to {user.email}')
